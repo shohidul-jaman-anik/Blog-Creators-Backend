@@ -22,13 +22,11 @@ const forumSchema = mongoose.Schema(
         message: 'Invalid category',
       },
     },
-    description: [
-      {
-        title: String,
-        content1: String,
-        content2: String,
-      },
-    ],
+    description: [{ content1: String }],
+    tags: {
+      type: [String],
+      required: [true, 'Please provide a forum category'],
+    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User', // Assuming you have a User model for property owners

@@ -44,7 +44,7 @@ module.exports.getForumService = async (filters, paginationOptions) => {
     .skip(skip)
     .limit(limit);
 
-    
+
   // console.log(blogData)
   const total = await Forum.estimatedDocumentCount();
   return {
@@ -65,10 +65,11 @@ module.exports.addForumServices = async data => {
 };
 
 module.exports.getForumServiceById = async id => {
-  const result = await Forum.findOne({ _id: id });
+  const result = await Forum.find({ _id: id }).populate('author');
   // console.log(result, 'resultt blog details')
   return result;
 };
+
 
 module.exports.getForumServiceByEmail = async email => {
   const result = await Forum.find({ authorEmail: email });
