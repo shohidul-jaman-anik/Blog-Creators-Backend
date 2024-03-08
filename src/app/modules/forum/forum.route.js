@@ -10,7 +10,7 @@ const forumUserActivitiesValidationSchema = require("./forum.validation");
 router
   .route("/:id")
   .get(forumController.getForumById)
-  .patch(forumController.updateForum)
+  .put(forumController.updateForum)
   .delete(forumController.deleteForum);
 router.route("/comment/:commentId").get(commentController.getComment)
 
@@ -19,6 +19,9 @@ router.route("/deleteComment/:id")
 
 router.route("/getBlogByEmail/:email")
   .get(commentController.getForumByEmail);
+  
+router.route("/getBlogByAuthorId/:id")
+  .get(forumController.getForumByAuthorId);
 
 router.route("/")
   .get(forumController.getForum)

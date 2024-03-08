@@ -86,7 +86,7 @@ const verifySeller = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { firstName, lastName, password, email, profile, gender, mobile } =
+    const { username, password, email, profile, gender, mobile } =
       req.body;
     // const data = req.body;
 
@@ -100,8 +100,7 @@ const register = async (req, res, next) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await UserModel.create({
-        firstName,
-        lastName,
+        username,
         email,
         password: hashedPassword,
         profile: profile || '',
@@ -120,7 +119,7 @@ const register = async (req, res, next) => {
         //       <div style="max-width: 1050px;  background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         //         <h2 style="color: #333333;">Email Verification</h2>
         //         <p style="color: #666666; font-size: 18px;">Dear user,</p>
-        //         <p style="color: #666666; font-size: 18px;">Thank you for signing up on Rental Home! To complete your registration, please click the link below to verify your email address:</p>
+        //         <p style="color: #666666; font-size: 18px;">Thank you for signing up on CREATORCART! To complete your registration, please click the link below to verify your email address:</p>
 
         //         <button  style="margin-bottom: 20px; background-color: #242C36; color: #FFFFFF; border: none; display: inline-block; border-radius: 8px; transition: background-color 0.3s; padding: 8px 15px; cursor: pointer;  text-align: center; ">
         //         <a href="${config.confirm_reg_email}/${token}" style="text-decoration: none; color: #FFFFFF; font-size: 18px;">Verify Email</a>
@@ -128,7 +127,7 @@ const register = async (req, res, next) => {
 
         //         <p style="color: #666666; font-size: 18px;">If you didn't sign up for our service, you can ignore this email.</p>
         //       </div>
-        //       <p style="color: #999999; margin-top: 20px;">This email was sent by Rental Home.</p>
+        //       <p style="color: #999999; margin-top: 20px;">This email was sent by CREATORCART.</p>
         //     </div>`,
         // };
 
@@ -183,7 +182,7 @@ const sellerRegistration = async (req, res, next) => {
               <div style="max-width: 600px;  background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                 <h2 style="color: #333333;">Email Verification</h2>
                 <p style="color: #666666;">Dear user,</p>
-                <p style="color: #666666;">Thank you for signing up on commerce! To complete your registration, please click the link below to verify your email address:</p>
+                <p style="color: #666666;">Thank you for signing up on CREATORCART! To complete your registration, please click the link below to verify your email address:</p>
                 
                 <p style="color: #666666; margin-bottom: 20px;">
                    <a 
@@ -194,7 +193,7 @@ const sellerRegistration = async (req, res, next) => {
 
                 <p style="color: #666666;">If you didn't sign up for our service, you can ignore this email.</p>
               </div>
-              <p style="color: #999999; margin-top: 20px;">This email was sent by Commerce.</p>
+              <p style="color: #999999; margin-top: 20px;">This email was sent by CREATORCART.</p>
             </div>`,
         };
 
@@ -353,14 +352,18 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+
+
 async function updateUser(req, res) {
   try {
     // const id = req.query.id;
     const userId = req.params?.userId;
     console.log(userId, 'userId');
 
+
     if (userId) {
       const body = req.body;
+
 
       // update the data
       const result = await UserModel.updateOne({ _id: userId }, body);

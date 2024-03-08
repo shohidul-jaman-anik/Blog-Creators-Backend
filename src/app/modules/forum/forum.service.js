@@ -65,8 +65,9 @@ module.exports.addForumServices = async data => {
 };
 
 module.exports.getForumServiceById = async id => {
-  const result = await Forum.find({ _id: id }).populate('author');
+  const resultArray = await Forum.find({ _id: id }).populate('author');
   // console.log(result, 'resultt blog details')
+  const result = Array.isArray(resultArray) && resultArray.length > 0 ? resultArray[0] : null;
   return result;
 };
 
@@ -77,12 +78,22 @@ module.exports.getForumServiceByEmail = async email => {
   return result;
 };
 
+module.exports.getForumServiceByAythorId = async id => {
+  const result = await Forum.find({ author: id }).populate('author');
+  // console.log(result, 'resultt blog details')
+  return result;
+};
+
+
+
 module.exports.updateForumService = async (storeId, data) => {
-  const result = await Forum.updateOne(
+  const resultArray = await Forum.updateOne(
     { _id: storeId },
     { $set: data },
     { runValidators: true },
   );
+
+  const result = Array.isArray(resultArray) && resultArray.length > 0 ? resultArray[0] : null;
 
   return result;
 };
