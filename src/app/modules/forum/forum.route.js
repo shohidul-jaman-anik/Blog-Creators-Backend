@@ -23,6 +23,10 @@ router.route("/getBlogByEmail/:email")
 router.route("/getBlogByAuthorId/:id")
   .get(forumController.getForumByAuthorId);
 
+
+router.route("/getBlogByAuthorId/:id")
+  .get(forumController.getForumByAuthorId);
+
 router.route("/")
   .get(forumController.getForum)
   .get(forumController.getForumSuggestion)

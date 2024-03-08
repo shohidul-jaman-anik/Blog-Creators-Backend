@@ -23,7 +23,6 @@ const { catchAsync } = require('../../../shared/catchAsync');
 module.exports.addForum = catchAsync(async (req, res) => {
   // console.log(req.body, "blog dataaaa");
 
-
   const data = req.body;
   const result = await addForumServices(data);
 
@@ -89,7 +88,6 @@ module.exports.getForumByEmail = catchAsync(async (req, res) => {
     data: result,
   });
 });
-
 
 module.exports.getForumByAuthorId = catchAsync(async (req, res) => {
   const { id } = req.params;
