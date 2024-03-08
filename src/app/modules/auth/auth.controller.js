@@ -86,7 +86,7 @@ const verifySeller = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { firstName, lastName, password, email, profile, gender, mobile } =
+    const { username, password, email, profile, gender, mobile } =
       req.body;
     // const data = req.body;
 
@@ -100,8 +100,12 @@ const register = async (req, res, next) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await UserModel.create({
-        firstName,
-        lastName,
+        username,
+        // profile,
+        // address,
+        // zip,
+        // country,
+        // state,
         email,
         password: hashedPassword,
         profile: profile || '',
