@@ -2,12 +2,10 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const UserSchema = new mongoose.Schema({
-  firstName: {
+  username: {
     type: String,
   },
-  lastName: {
-    type: String,
-  },
+
   email: {
     type: String,
     required: [true, 'Please provide a unique email'],
@@ -28,23 +26,23 @@ const UserSchema = new mongoose.Schema({
   seller: { type: Boolean, default: false },
   mobile: { type: Number },
   address: { type: String },
+  zipCode: { type: Number },
+  country: { type: String },
+  delete: { type: Boolean, default: false },
+  publicProfile: { type: Boolean, default: false },
+  city: { type: String },
   gender: {
     type: String,
-    enum: {
-      values: ['Male', 'Female'],
-    },
+    // enum: {
+    //   values: ['Male', 'Female'],
+    // },
   },
   profile: { type: String },
+  delete_url: { type: String },
   wishlist: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
-    },
-  ],
-  contract: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Contract',
     },
   ],
   confirmationToken: String,

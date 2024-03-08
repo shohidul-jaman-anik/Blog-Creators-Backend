@@ -7,7 +7,7 @@ const router = express.Router()
 const { Auth } = require("../../middlewares/auth/auth")
 
 router.route('/register').post(authController.register)// Register user
-router.route('/registerlandlord').post(authController.sellerRegistration)// Register seller
+router.route('/registerSeller').post(authController.sellerRegistration)// Register seller
 router.route('/register/confirmation/:token').get(authController.confirmEmail)// verify mail
 
 
