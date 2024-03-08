@@ -77,7 +77,7 @@ module.exports.getForumServiceByEmail = async email => {
   return result;
 };
 module.exports.getForumServiceByAythorId = async id => {
-  const result = await Forum.find({ author: id });
+  const result = await Forum.find({ _id: id });
   // console.log(result, 'resultt blog details')
   return result;
 };

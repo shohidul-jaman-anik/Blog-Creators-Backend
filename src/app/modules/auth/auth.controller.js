@@ -101,12 +101,12 @@ const register = async (req, res, next) => {
 
       const user = await UserModel.create({
         username,
-        // profile,
-        // address,
-        // zip,
-        // country,
-        // state,
-        email,
+        profile:'',
+        address:'',
+        zip:'',
+        country:'',
+        state:'',
+        email:'',
         password: hashedPassword,
         profile: profile || '',
         gender: gender || '',

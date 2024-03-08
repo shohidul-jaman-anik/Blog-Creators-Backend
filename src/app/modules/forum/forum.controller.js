@@ -88,7 +88,7 @@ module.exports.getForumByAuthorId = catchAsync(async (req, res) => {
     message: 'Get Blog by author id successfully',
     data: result,
   });
-});
+}); 
 
 exports.updateForum = catchAsync(async (req, res) => {
   const { id } = req.params;
