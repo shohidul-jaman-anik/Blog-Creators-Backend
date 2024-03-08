@@ -19,7 +19,7 @@ router.route("/deleteComment/:id")
 
 router.route("/getBlogByEmail/:email")
   .get(commentController.getForumByEmail);
-  
+ 
 router.route("/getBlogByAuthorId/:id")
   .get(forumController.getForumByAuthorId);
 

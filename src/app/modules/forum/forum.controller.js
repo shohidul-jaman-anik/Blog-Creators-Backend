@@ -1,4 +1,5 @@
 
+
 const { sendResponse } = require('../../../shared/sendResponse');
 const pick = require('../../middlewares/other/pick');
 const { paginationFields } = require('./forum.constant');
@@ -18,11 +19,14 @@ const {
 const { addForumServices } = require('./forum.service');
 const { catchAsync } = require('../../../shared/catchAsync');
 
+
 module.exports.addForum = catchAsync(async (req, res) => {
   // console.log(req.body, "blog dataaaa");
 
+
   const data = req.body;
   const result = await addForumServices(data);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -32,13 +36,17 @@ module.exports.addForum = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.getForum = catchAsync(async (req, res) => {
   const filters = pick(req.query, ['searchTerm', 'title', 'category']);
 
+
   const paginationOptions = pick(req.query, paginationFields);
+
 
   const result = await getForumService(filters, paginationOptions);
   // const result = await getBlogService(req.body)
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -48,11 +56,14 @@ module.exports.getForum = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.getForumById = catchAsync(async (req, res) => {
   const { id } = req.params;
   console.log(id, 'blog idddd');
 
+
   const result = await getForumServiceById(id);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -62,11 +73,14 @@ module.exports.getForumById = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.getForumByEmail = catchAsync(async (req, res) => {
   const { email } = req.params;
   console.log(email, 'blog email');
 
+
   const result = await getForumServiceByEmail(email);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -76,12 +90,17 @@ module.exports.getForumByEmail = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.getForumByAuthorId = catchAsync(async (req, res) => {
   const { id } = req.params;
   console.log(id, 'author id');
 
 
+
+
   const result = await getForumServiceByAythorId(id);
+
+
 
 
   sendResponse(res, {
@@ -92,9 +111,11 @@ module.exports.getForumByAuthorId = catchAsync(async (req, res) => {
   });
 });
 
+
 exports.updateForum = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await updateForumService(id, req.body);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -104,9 +125,11 @@ exports.updateForum = catchAsync(async (req, res) => {
   });
 });
 
+
 exports.deleteForum = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await deleteForumService(id);
+
 
   if (!result.deletedCount) {
     return res.status(400).json({
@@ -114,6 +137,7 @@ exports.deleteForum = catchAsync(async (req, res) => {
       error: "Could't delete the Blog",
     });
   }
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -123,11 +147,14 @@ exports.deleteForum = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.getForumSuggestion = catchAsync(async (req, res) => {
   const { suggestion } = req.params;
   // console.log(suggestion, 'suggestion suggestion')
 
+
   const result = await getForumSuggestionService(suggestion);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -137,12 +164,14 @@ module.exports.getForumSuggestion = catchAsync(async (req, res) => {
   });
 });
 
+
 module.exports.addUserForumActivity = catchAsync(async (req, res) => {
   // console.log(req.body, "dataaaa")
   // const { id } = req.params
   const data = req.body;
   // console.log(data, "dataaaa")
   const result = await addUserForumActivityServices(data);
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -158,6 +187,7 @@ module.exports.getComment = catchAsync(async (req, res) => {
   const result = await getCommnetService(commentId);
   // console.log(result, 'comments dataaa')
 
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -169,12 +199,14 @@ exports.deleteComment = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await deleteCommentServices(id);
 
+
   if (!result.deletedCount) {
     return res.status(400).json({
       status: 'fail',
       error: "Could't delete the Comment",
     });
   }
+
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

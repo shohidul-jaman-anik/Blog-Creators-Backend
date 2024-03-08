@@ -2,16 +2,20 @@ const paginationHelpers = require('../../helpers/paginationHelpers');
 const Forum = require('./forum.model');
 const UserForumActivities = require('./forumUserActivities.model');
 
+
 module.exports.getForumService = async (filters, paginationOptions) => {
   const { searchTerm, ...filtersData } = filters;
 
+
   const productsSearchAbleFields = ['title', 'category'];
   const andConditions = [];
+
 
   // Add a default condition if andConditions is empty
   if (andConditions.length === 0) {
     andConditions.push({});
   }
+
 
   if (searchTerm) {
     andConditions.push({
@@ -21,6 +25,7 @@ module.exports.getForumService = async (filters, paginationOptions) => {
     });
   }
 
+
   // if (Object.keys(filtersData).length) {
   //     andConditions.push({
   //         $and: Object.entries(filtersData).map(([field, value]) => ({
@@ -29,13 +34,16 @@ module.exports.getForumService = async (filters, paginationOptions) => {
   //     });
   // }
 
+
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
+
 
   const sortConditions = {};
   if (sortBy && sortOrder) {
     sortConditions[sortBy] = sortOrder;
   }
+
 
   const forumData = await Forum.find({ $and: andConditions })
     .populate('author')
@@ -43,6 +51,8 @@ module.exports.getForumService = async (filters, paginationOptions) => {
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
+
+
 
 
   // console.log(blogData)
@@ -57,12 +67,14 @@ module.exports.getForumService = async (filters, paginationOptions) => {
   };
 };
 
+
 module.exports.addForumServices = async data => {
   // console.log(data, 'blog dataaa')
   const result = await Forum.create(data);
   // console.log(result, "dataasss")
   return result;
 };
+
 
 module.exports.getForumServiceById = async id => {
   const resultArray = await Forum.find({ _id: id }).populate('author');
@@ -72,18 +84,20 @@ module.exports.getForumServiceById = async id => {
 };
 
 
+
+
 module.exports.getForumServiceByEmail = async email => {
   const result = await Forum.find({ authorEmail: email });
   // console.log(result, 'resultt blog details')
   return result;
 };
 
+
 module.exports.getForumServiceByAythorId = async id => {
   const result = await Forum.find({ author: id }).populate('author');
   // console.log(result, 'resultt blog details')
   return result;
 };
-
 
 
 module.exports.updateForumService = async (storeId, data) => {
@@ -117,7 +131,7 @@ module.exports.addUserForumActivityServices = async data => {
   // }
   console.log(data, 'dataaaaa');
 
-  const result = await UserForumActivities.create(data);
+ const result = await UserForumActivities.create(data);
   // console.log(result, "resulttttt comment")
   return result;
 };

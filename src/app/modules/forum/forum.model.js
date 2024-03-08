@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 // const validator = require('validator');
 const { categoryValues } = require('./forum.constant');
 
+
 const forumSchema = mongoose.Schema(
   {
     title: {
