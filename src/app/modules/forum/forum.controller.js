@@ -13,6 +13,7 @@ const {
   deleteForumService,
   getForumSuggestionService,
   addUserForumActivityServices,
+  getForumServiceByAythorId,
 } = require('./forum.service');
 const { addForumServices } = require('./forum.service');
 const { catchAsync } = require('../../../shared/catchAsync');
@@ -71,6 +72,20 @@ module.exports.getForumByEmail = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Get Blog by email successfully',
+    data: result,
+  });
+});
+
+module.exports.getForumByAuthorId = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  console.log(id, 'author id');
+
+  const result = await getForumServiceByAythorId(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Get Blog by author id successfully',
     data: result,
   });
 });

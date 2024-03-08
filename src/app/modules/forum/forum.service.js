@@ -76,7 +76,11 @@ module.exports.getForumServiceByEmail = async email => {
   // console.log(result, 'resultt blog details')
   return result;
 };
-
+module.exports.getForumServiceByAythorId = async id => {
+  const result = await Forum.find({ author: id });
+  // console.log(result, 'resultt blog details')
+  return result;
+};
 module.exports.updateForumService = async (storeId, data) => {
   const result = await Forum.updateOne(
     { _id: storeId },
